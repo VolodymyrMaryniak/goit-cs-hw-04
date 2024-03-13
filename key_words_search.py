@@ -22,8 +22,7 @@ def concurrent_key_words_search(
     workers_count = min(workers_count, len(file_paths))
 
     # Divide the file paths into groups
-    group_size = len(file_paths) // workers_count
-    file_paths_groups = [file_paths[i::group_size] for i in range(group_size)]
+    file_paths_groups = [file_paths[i::workers_count] for i in range(workers_count)]
 
     # Create an executor (ThreadPoolExecutor, ProcessPoolExecutor, etc.)
     with executor_factory(workers_count) as executor:
